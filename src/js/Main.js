@@ -57,3 +57,23 @@ function popError(msg){
     document.getElementById("errText").innerHTML = msg;
     $('#errModal').modal('show');
 }
+
+$(document).ready(function(){
+  $('[data-toggle="tab"').on('shown.bs.tab', function(event){
+    $('#navbarNav').removeClass('show').addClass('collapse');
+  });
+});
+
+/**
+ * @author Madot10
+ */
+function getHr(value){
+    return `${value - (value > 12 ? 12 : 0)}:00` + (value > 12 ? 'PM' : 'AM');
+}
+
+/**
+ * @author Madot10
+ */
+function rangeTime(ele){
+    document.getElementById("timeToShow").innerHTML = getHr(ele.value);
+}
