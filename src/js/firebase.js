@@ -9,6 +9,8 @@ var config = {
 };
 firebase.initializeApp(config);
 let provider = new firebase.auth.GoogleAuthProvider();
+let db = firebase.firestore();
+
 let userData;
 
 function isAuth(){
@@ -54,6 +56,24 @@ function LogOut(){
         // An error happened.
         popError(`Ocurrio un error al intentar cerrar con la cuenta ${error.email} <br> ${error.message} <br> Codigo: ${error.code}`);
       });
+}
+
+function addRegistro(dnd, hr, sts, catg){
+    let day = new Date();
+
+    db.collection("objPerdidos").add({
+        catg: catg,
+        hrs: hr,
+        where: dnd,
+        status: sts,
+        timeAdd: day.getTime()
+    })
+    .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
 }
 
 window.onload = ()=>{
