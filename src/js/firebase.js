@@ -10,6 +10,7 @@ var config = {
 firebase.initializeApp(config);
 let provider = new firebase.auth.GoogleAuthProvider();
 let db = firebase.firestore();
+db.settings({ timestampsInSnapshots: true });
 
 let userData;
 
@@ -59,14 +60,13 @@ function LogOut(){
 }
 
 function addRegistro(dnd, hr, sts, catg){
-    let day = new Date();
 
     db.collection("objPerdidos").add({
         catg: catg,
         hrs: hr,
         where: dnd,
         status: sts,
-        timeAdd: day.getTime()
+        timeAdd: new Date()
     })
     .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
@@ -88,7 +88,7 @@ window.onload = ()=>{
 		} else {
 		  // No user is signed in.
 		  console.log("no1");
-		  changeScreen("start");
+		  //changeScreen("start");
 		}
 	  });
 }

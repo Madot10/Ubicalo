@@ -1,58 +1,3 @@
-function changeScreen(scrName) {
-    let eMain = document.getElementById("main");
-    let eStart = document.getElementById("start");
-    let eBus = document.getElementById("sbuscar");
-    let ePubli = document.getElementById("spubli");
-
-    eMain.style.display = "none";
-    eStart.style.display = "none";
-    eBus.style.display = "none";
-    ePubli.style.display = "none";
-
-    //cerrar navbar
-    document.getElementById("navbarNav").classList.remove("show");
-    document.getElementById("navbarNav").classList.add("collapse");
-    document.body.classList.remove("bg-secondary");
-
-    switch (scrName) {
-        case "main":
-            if (isAuth()) {
-                eMain.style.display = "block";
-            } else {
-                changeScreen("start");
-                popError("Debes iniciar sesion para poder continuar");
-            }
-
-            break;
-
-        case "sbuscar":
-            if (isAuth()) {
-                eBus.style.display = "block";
-            } else {
-                changeScreen("start");
-                popError("Debes iniciar sesion para poder continuar");
-            }
-            break;
-
-        case "spubli":
-            if (isAuth()) {
-                ePubli.style.display = "block";
-            } else {
-                changeScreen("start");
-                popError("Debes iniciar sesion para poder continuar");
-            }
-            break;
-
-        case "start":
-            document.body.classList.add("bg-secondary");
-            eStart.style.display = "block";
-            break;
-
-        default:
-            break;
-    }
-}
-
 function popError(msg){
     document.getElementById("errText").innerHTML = msg;
     $('#errModal').modal('show');
@@ -76,4 +21,36 @@ function getHr(value){
  */
 function rangeTime(ele){
     document.getElementById("timeToShow").innerHTML = getHr(ele.value);
+}
+
+function verificarForm(){
+    let inputs = document.getElementById("fpublicar").elements;
+    let reqInp = ["obj_ubicacion","obj_ult_ubicacion","obj_tipo"];
+    let st = true;
+
+    reqInp.forEach(element => {
+        if(inputs[element].value == "" || inputs[element].value == "select"){
+            st = false;
+        }    
+    });
+    
+    return st;
+}
+
+function enviarObj(){
+    let inputs = document.getElementById("fpublicar").elements;
+    if(verificarForm()){
+        addRegistro(inputs["obj_ubicacion"].value, inputs["obj_hora"].value,inputs["obj_ult_ubicacion"].value,inputs["obj_tipo"].value);
+        console.log("sendit");
+    }
+}
+
+function changeScreen(nameScr){
+    //something more
+    if(nameScr == "publicar"){
+        //limpiar campos
+    }else if(nameScr == "buscar"){
+        //chequear tiempo de ultima carga
+    }
+    $(`#navbarNav a[href="#${nameScr}"] `).tab('show');
 }
