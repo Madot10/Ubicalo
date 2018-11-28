@@ -15,36 +15,26 @@ db.settings({ timestampsInSnapshots: true });
 let userData;
 
 function isAuth(){
-    //return !(firebase.auth().currentUser == null)
-    return true;
+    return !(firebase.auth().currentUser == null)
+    //return true;
 }
 
 function LogInPopup(){
     firebase.auth().signInWithPopup(provider).then(function(result) {
-      userData = { email: result.user.email,
-                   name: result.user.displayName
-                  };
-      changeScreen("main");
-      document.getElementById("navbarTog").style.display = "-ms-flexbox";    
+      changeScreen("main"); 
   
        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    .then(function() {
-      // Existing and future Auth states are now persisted in the current
-      // session only. Closing the window would clear any existing state even
-      // if a user forgets to sign out.
-      // ...
-      // New sign-in will be persisted with session persistence.
-      console.log("ok");
-    })
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    });           
+        .then(function() {
+            console.log("ok");
+        })
+        .catch(function(error) {
+        // Handle Errors here.
+            popError(`Ocurrio un error al iniciar con la cuenta ${error.email} <br> ${error.message} <br> Codigo: ${error.code}`);
+        });           
   
     }).catch(function(error) {
       // Handle Errors here.
-      popError(`Ocurrio un error al iniciar con la cuenta ${error.email} <br> ${error.message} <br> Codigo: ${error.code}`);
+        popError(`Ocurrio un error al iniciar con la cuenta ${error.email} <br> ${error.message} <br> Codigo: ${error.code}`);
     });
   }
 
@@ -83,12 +73,14 @@ function addRegistro(dnd, hr, sts, catg, descri){
 }
 
 function getAllReg(){
-    db.collection("objPerdidos").get()
+    db.collection("objPerdidos").orderBy("timeAdd", "desc").get()
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data(),doc,doc.data().catg);
+                genHTMLobj(`${doc.data().catg.toUpperCase()}: ${doc.data().status}`, doc.data().description, doc.data().timeAdd.seconds)
+                console.log(doc.id, " => ", doc.data());
             });
+            toggleLoader();
     });
 }
 

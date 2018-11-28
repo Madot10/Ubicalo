@@ -49,7 +49,7 @@
 
     <div class="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" onclick="changeScreen('main')" >
                 <img src="src/Logo1.png" height="35em" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
@@ -60,23 +60,38 @@
                 <div class="nav nav-fill justify-content-around">
                     <a class="nav-item nav-link" href="#buscar" onclick="changeScreen('buscar')">Buscar</a>
                     <a class="nav-item nav-link" href="#publicar" onclick="changeScreen('publicar')">Publicar</a>
-                    <a class="nav-item nav-link" href="#salir" onclick="">Salir</a>
+                    <a class="nav-item nav-link" href="#salir" onclick="LogOut()">Salir</a>
                 </div>
             </div>
         </nav>
 
         <div id="loader" style=" display: none"></div>
+        <div id="overlay" style=" display: none"></div>
 
-        <!-- <div class="tab-content text-light bg-secondary"  id="main-app"> -->
             <div class="screen text-light" id="start">
                 <div class="justify-content-md-center">
                     <div class="col-xl-auto" align="center">
                         <h4>Bienvenido</h4>
                         <h4>U.bicalo</h4>
                             <p>Encontraste o perdiste algo, ubicalo con la colaboracion de los ucabistas</p>
-                            <button type="button" class="btn btn-outline-light btn-block" onclick=""><i class="fab fa-google"></i> Iniciar sesión</button>
+                            <button type="button" class="btn btn-outline-light btn-block" onclick="LogInPopup()"><i class="fab fa-google"></i> Iniciar sesión</button>
                     </div>
                 </div>
+            </div>
+
+            <div class="screen" id="main" style="display: none;">
+                    <div class="justify-content-md-center">
+                            <div class="col-xl-auto" align="center">
+                                <div class="container text-dark">
+                                    <br>
+                                    <h4>Pantalla inicio</h4>
+                                        <p>
+                                            Proyecto para INGENIO - Esc. Ing. Informática <span class="badge badge-primary">New</span> <br>
+                                            ¿Encontraste o perdiste algo?, ubicalo con la colaboracion de los ucabistas
+                                        </p>
+                                    </div>
+                            </div>
+                        </div>
             </div>
 
             <div id="buscar" class="screen" style="display: none;">
@@ -85,20 +100,6 @@
                     <p class="lead">Podrás ubicar los objetos recientemente reportados</p>
                     <hr class="my-4">
                     <div class="list-group" id="objPer">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                      <h5 class="mb-1">List group item heading</h5>
-                                      <small>3 days ago</small>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                  </a>
-                                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                      <h5 class="mb-1">List group item heading</h5>
-                                      <small class="text-muted">3 days ago</small>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                  </a>
                     </div>
                 </div>
             </div>
@@ -153,7 +154,6 @@
                         </div>
                 </div>
             </div>
-        <!-- </div> -->
     </div>
 </body>
 

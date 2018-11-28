@@ -1,5 +1,8 @@
 /***************VARIABLES************************* */
 let isBg = true;
+let lastUpd = 0;
+const timeToUpdate = 2 * 60 * 1000; //mseg 2min
+
 
 /*******************FUNCIONES********************* */
 function popError(msg){
@@ -63,18 +66,48 @@ function changeScreen(nameScr){
         isBg = true;
 
     }else if(nameScr != "start" && isBg){
+        //No Screen start
         document.body.classList.remove("bg-dark");
         isBg = false;
     }
 
+    if(nameScr == "buscar" && isAuth()){
+        if(isNeededUpdate()){
+            document.getElementById("objPer").innerHTML = "";
+            toggleLoader();
+            getAllReg();
+        }
+    }
+
     //Cambio de screen
-    if(nameScr == "start" || isAuth() )
+    if(nameScr == "start" || isAuth() ){
         document.getElementsByClassName("screen")[nameScr].style.display = "block";
+    }else{
+        changeScreen("start");
+        popError("Debes iniciar sesion para poder continuar");
+    }
+        
+}
+
+//Chequea tiempo que fue actualizado el feed para optimizar
+function isNeededUpdate(){
+    let act = new Date();
+    act = act.getTime();
+    
+    if(act - lastUpd > timeToUpdate){
+        lastUpd = act;
+        return true;
+    }
+    return false;
 }
 
 function toggleLoader(){
     let loader = document.getElementById("loader");
+    let overl = document.getElementById("overlay");
+
+    overl.style.display = overl.style.display=="none" ? "block" : "none";
     loader.style.display = loader.style.display=="none" ? "block" : "none";
+    
 }
 
 function clearForm(){
@@ -87,11 +120,11 @@ function clearForm(){
 
 function genHTMLobj(title, descp, time){
     let mainA = document.createElement('a');
-    mainA.href = "#"
-    mainA.classList.add("list-group-item list-group-item-action flex-column align-items-start");
+    //mainA.href = "#"
+    mainA.classList.add("list-group-item", "list-group-item-action", "flex-column", "align-items-start");
 
     let mDiv = document.createElement('div');
-    mainDiv.classList.add("d-flex w-100 justify-content-between");
+    mDiv.classList.add("d-flex", "w-100", "justify-content-between");
 
         let htitle = document.createElement('h5');
         htitle.classList.add("mb-1");
@@ -106,11 +139,12 @@ function genHTMLobj(title, descp, time){
     let pDes = document.createElement('p');
     pDes.classList.add("mb-1");
     pDes.innerHTML = descp;
+    pDes.style.wordWrap = "break-word";
 
     mainA.appendChild(mDiv);
     mainA.appendChild(pDes);
 
-    document.getElementById("objPer").innerHTML += mainA;
+    document.getElementById("objPer").appendChild(mainA);
 }
 
 function timeAgoGen(sgOld){
