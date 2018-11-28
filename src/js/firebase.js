@@ -59,9 +59,10 @@ function LogOut(){
       });
 }
 
-function addRegistro(dnd, hr, sts, catg){
-
+function addRegistro(dnd, hr, sts, catg, descri){
+    toggleLoader();
     db.collection("objPerdidos").add({
+        description: descri,
         catg: catg,
         hrs: hr,
         where: dnd,
@@ -70,9 +71,24 @@ function addRegistro(dnd, hr, sts, catg){
     })
     .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
+        clearForm();
+        toggleLoader();
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
+        popError(error);
+        toggleLoader();
+    });
+
+}
+
+function getAllReg(){
+    db.collection("objPerdidos").get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data(),doc,doc.data().catg);
+            });
     });
 }
 

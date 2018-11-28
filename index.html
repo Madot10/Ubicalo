@@ -27,7 +27,7 @@
     
 </head>
 
-<body>
+<body class="bg-dark">
     <!-- MODAL ERROR -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="errModal">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -48,7 +48,7 @@
         </div>
 
     <div class="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
             <a class="navbar-brand" href="#">
                 <img src="src/Logo1.png" height="35em" alt="">
             </a>
@@ -57,17 +57,19 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav" role="navigation">
-                <div class="nav nav-fill justify-content-around" role="tablist">
-                    <a class="nav-item nav-link" data-toggle="tab" role="tab" href="#buscar">Buscar</a>
-                    <a class="nav-item nav-link" data-toggle="tab" role="tab" href="#publicar">Publicar</a>
-                    <!-- <a class="nav-item nav-link" data-toggle="tab" href="#" onclick="">Salir</a> -->
+                <div class="nav nav-fill justify-content-around">
+                    <a class="nav-item nav-link" href="#buscar" onclick="changeScreen('buscar')">Buscar</a>
+                    <a class="nav-item nav-link" href="#publicar" onclick="changeScreen('publicar')">Publicar</a>
+                    <a class="nav-item nav-link" href="#salir" onclick="">Salir</a>
                 </div>
             </div>
         </nav>
 
-        <main class="tab-content text-light" id="main-app">
-            <div class="tab-pane w-100 h-100 container bg-secondary fade show active" id="start" role="tabpanel">
-                <div class="row justify-content-md-center">
+        <div id="loader" style=" display: none"></div>
+
+        <!-- <div class="tab-content text-light bg-secondary"  id="main-app"> -->
+            <div class="screen text-light" id="start">
+                <div class="justify-content-md-center">
                     <div class="col-xl-auto" align="center">
                         <h4>Bienvenido</h4>
                         <h4>U.bicalo</h4>
@@ -77,17 +79,32 @@
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="buscar" role="tabpanel">
-                <div class="jumbotron text-dark">
+            <div id="buscar" class="screen" style="display: none;">
+                <div class="container text-dark">
                     <h2>Buscador</h2>
-                    <p class="lead">Este es el buscador de Ub&iacute;calo</p>
+                    <p class="lead">Podrás ubicar los objetos recientemente reportados</p>
                     <hr class="my-4">
-                    <p>En esta vista se debe implementar un buscador para los reportes de objetos perdidos</p>
+                    <div class="list-group" id="objPer">
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                      <h5 class="mb-1">List group item heading</h5>
+                                      <small>3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                  </a>
+                                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                      <h5 class="mb-1">List group item heading</h5>
+                                      <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                  </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="publicar" role="tabpanel">
-                <div class="jumbotron text-dark">
+            <div  id="publicar" class="screen" style="display: none;">
+                <div class="container text-dark">
                     <h2>Notificar</h2>
                     <p class="lead">Encontraste un objeto? <br>
                         Ayuda al due&ntilde;o a encontrarlo!</p>
@@ -100,6 +117,10 @@
                                             <div class="form-group col-12">
                                                 <label for="input-ubicacion">D&oacute;nde lo encontraste?*</label>
                                                 <input type="text" class="form-control" id="input-ubicacion" name="obj_ubicacion">
+                                            </div>
+                                            <div class="form-group col-12">
+                                                <label for="input-descripcion">Descripción</label>
+                                                <input type="textarea" class="form-control" id="input-descripcion" name="obj_descripcion">
                                             </div>
                                             <div class="form-group col-12">
                                                 <label for="input-hora">Hora: <span id="timeToShow">2:00AM</span></label>
@@ -132,7 +153,7 @@
                         </div>
                 </div>
             </div>
-        </main>
+        <!-- </div> -->
     </div>
 </body>
 
