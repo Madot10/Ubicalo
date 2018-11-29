@@ -8,6 +8,7 @@ var config = {
     messagingSenderId: "534432514058"
 };
 firebase.initializeApp(config);
+
 let provider = new firebase.auth.GoogleAuthProvider();
 let db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });
