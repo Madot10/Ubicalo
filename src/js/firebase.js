@@ -13,11 +13,36 @@ let provider = new firebase.auth.GoogleAuthProvider();
 let db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });
 
+let functions = firebase.functions();
+
 let userData;
 
 function isAuth(){
     return !(firebase.auth().currentUser == null)
     //return true;
+}
+
+function isAdmin(email){
+    if(email){
+        return db.collection('adminUsers')
+            .doc(email).get()
+            .then(doc => {
+                if (!doc.exists) {
+                    //No existe usuario => no autorizado 
+                    console.log('No encontrado', email);
+                    return false;
+                } else {
+                    //Existe
+                    console.log('Encontrado => ', doc.data().auth);
+                    return doc.data().auth            
+                }
+            }).catch(err => {
+                //ERROR 
+                console.log('ERROR ',email, err);
+                return false;
+              });
+          
+    }
 }
 
 function LogInPopup(){

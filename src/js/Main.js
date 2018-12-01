@@ -18,16 +18,11 @@ $(document).ready(function(){
 });
 */
 
-/**
- * @author Madot10
- */
+
 function getHr(value){
     return `${value - (value > 12 ? 12 : 0)}:00` + (value > 12 ? 'PM' : 'AM');
 }
 
-/**
- * @author Madot10
- */
 function rangeTime(ele){
     document.getElementById("timeToShow").innerHTML = getHr(ele.value);
 }
@@ -225,3 +220,17 @@ function timeAgoGen(sgOld){
 
     return stResult;
 }
+
+
+if (navigator.serviceWorker.controller) {
+    console.log('[PWA Builder] active service worker found, no need to register')
+  } else {
+    //Register the ServiceWorker
+    navigator.serviceWorker.register('ubi-sw.js', {
+      scope: './'
+    }).then(function(reg) {
+      console.log('Service worker has been registered for scope:'+ reg.scope);
+    });
+  }
+  
+  
