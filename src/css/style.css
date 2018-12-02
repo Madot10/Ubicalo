@@ -3,6 +3,10 @@ html, body {
     min-width: 100vw;
 }
 
+.clicker:hover{
+  cursor: pointer;
+}
+
 #loader {
     position: absolute;
     left: 50%;

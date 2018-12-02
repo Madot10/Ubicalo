@@ -2,7 +2,8 @@
 let isBg = true;
 let lastUpd = 0;
 const timeToUpdate = 2 * 60 * 1000; //mseg 2min
-
+let objArr = [];
+let idSelect;
 
 /*******************FUNCIONES********************* */
 function popError(msg){
@@ -27,7 +28,7 @@ function rangeTime(ele){
     document.getElementById("timeToShow").innerHTML = getHr(ele.value);
 }
 
-function verificarForm(){
+function verificarFormP(){
     let inputs = document.getElementById("fpublicar").elements;
     let reqInp = ["obj_ubicacion","obj_ult_ubicacion","obj_tipo"];
     let st = true;
@@ -43,7 +44,7 @@ function verificarForm(){
 
 function enviarObj(){
     let inputs = document.getElementById("fpublicar").elements;
-    if(verificarForm()){
+    if(verificarFormP()){
         addRegistro(inputs["obj_ubicacion"].value, inputs["obj_hora"].value,inputs["obj_ult_ubicacion"].value,inputs["obj_tipo"].value,inputs["obj_descripcion"].value);
         console.log("sendit");
     }
@@ -113,10 +114,11 @@ function clearForm(){
     }
 }
 
-function genHTMLobj(title, descp, time){
+function genHTMLobj(title, descp, time, iArr, idDB){
     let mainA = document.createElement('a');
+    mainA.setAttribute('onclick',`popObj(${iArr},'${idDB}')`);
     //mainA.href = "#"
-    mainA.classList.add("list-group-item", "list-group-item-action", "flex-column", "align-items-start");
+    mainA.classList.add("clicker","list-group-item", "list-group-item-action", "flex-column", "align-items-start");
 
     let mDiv = document.createElement('div');
     mDiv.classList.add("d-flex", "w-100", "justify-content-between");
@@ -221,6 +223,65 @@ function timeAgoGen(sgOld){
     return stResult;
 }
 
+function popObj(index, id){
+    console.log("OBJECTO CLICKER", objArr[index]);
+    //Cargar datos a modal
+    idSelect = id;
+    let obj = objArr[index];
+    let outputs = document.getElementById("fshow").elements;
+    outputs[0].value = obj.where;
+    outputs[1].value = obj.description;
+    outputs[2].value = obj.status;
+    outputs[3].value= obj.catg;
+
+    if(userData.admin){
+        turnAdminMode();
+    }else{
+        //poner readonly
+        for (const felem of outputs) {
+            felem.setAttribute('readonly','');
+        }
+        //ocultar botones
+        document.getElementById('divButtons').style.display = "none";
+    }
+    
+    $('#objModal').modal("show");
+}
+
+function turnAdminMode(){
+    if(userData.admin){
+        //Poner forms para editar
+        let outputs = document.getElementById("fshow").elements;
+        for (const felem of outputs) {
+            felem.removeAttribute('readonly');
+        }
+        //Botones para borrar y guardar cambios
+        document.getElementById('divButtons').style.display = "flex";
+    }
+}
+
+function toDelete(){
+    delRegistro({id: idSelect}).then(function(re){
+        console.log("respuesta", re.data);
+    }).catch(err =>{
+        console.error('Error', err);
+        popError(err);
+    })
+    $('#objModal').modal("hide");
+}
+
+function toSaveChange(){
+    let daSend = {id: idSelect}
+    let outputs = document.getElementById("fshow").elements;
+    daSend['catg'] = outputs['obj_tipo'].value;
+    daSend['description'] = outputs['obj_descripcion'].value;
+    daSend['status'] = outputs['obj_ult_ubicacion'].value;
+    daSend['where'] = outputs['obj_ubicacion'].value;
+    $('#objModal').modal("hide");
+    modRegistro(daSend).then(function(re){
+        console.log("respuesta", re.data);
+    })
+}
 
 if (navigator.serviceWorker.controller) {
     console.log('[PWA Builder] active service worker found, no need to register')
@@ -232,5 +293,4 @@ if (navigator.serviceWorker.controller) {
       console.log('Service worker has been registered for scope:'+ reg.scope);
     });
   }
-  
   

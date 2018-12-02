@@ -14,6 +14,8 @@ let db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });
 
 let functions = firebase.functions();
+let modRegistro = firebase.functions().httpsCallable('modRegistro');
+let delRegistro = firebase.functions().httpsCallable('delRegistro');
 
 let userData;
 
@@ -48,7 +50,8 @@ function isAdmin(email){
 function LogInPopup(){
     firebase.auth().signInWithPopup(provider).then(function(result) {
       changeScreen("main"); 
-  
+        
+        
        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
             console.log("ok");
@@ -103,7 +106,8 @@ function getAllReg(){
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
-                genHTMLobj(`${doc.data().catg.toUpperCase()}: ${doc.data().status}`, doc.data().description, doc.data().timeAdd.seconds)
+                genHTMLobj(`${doc.data().catg.toUpperCase()}: ${doc.data().status}`, doc.data().description, doc.data().timeAdd.seconds, objArr.length, doc.id);
+                objArr[objArr.length] = doc.data();
                 console.log(doc.id, " => ", doc.data());
             });
             toggleLoader();
@@ -115,9 +119,22 @@ window.onload = ()=>{
 		if (user) {
 		  // User is signed in.
 		  console.log("ok1",user);
-		  userData = { email: user.email,
-			name: user.displayName
-		   };
+		  userData = { 
+                email: user.email,
+			    name: user.displayName
+           };
+
+           //guardar admin autentification
+           isAdmin(user.email).then(function(result){
+                if(result){
+                    //Con privilegios
+                    userData['admin'] = true;
+                }
+            }).catch(err =>{
+                console.error('Error', err);
+                return err;
+            })
+
 		  changeScreen("main");
 		} else {
 		  // No user is signed in.

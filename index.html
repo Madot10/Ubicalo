@@ -21,6 +21,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/brands.css" integrity="sha384-QT2Z8ljl3UupqMtQNmPyhSPO/d5qbrzWmFxJqmY7tqoTuT2YrQLEqzvVOP2cT5XW" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/regular.css" integrity="sha384-z3ccjLyn+akM2DtvRQCXJwvT5bGZsspS4uptQKNXNg778nyzvdMqiGcqHVGiAUyY" crossorigin="anonymous">
 
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
     <link rel="stylesheet" href="src/css/style.css">
@@ -47,7 +48,58 @@
     
                 </div>
             </div>
+    </div>
+
+    <!-- MODAL PopObject -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="objModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Más información...</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="fshow">
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label for="input-ubiShown">Dónde se encontró:</label>
+                                <input type="text" class="form-control" id="input-ubiShow" name="obj_ubicacion" readonly>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="input-descShow">Descripción:</label>
+                                <textarea  type="textarea" class="form-control" id="input-desShow" name="obj_descripcion" readonly></textarea>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="input-ult-ubiShow">Se encuentra en:</label>
+                                <input type="text" class="form-control" id="input-ult-ubiShow" name="obj_ult_ubicacion" readonly>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="select-tipoShow">Tipo de objeto:</label>
+                                <select name="obj_tipo" id="select-tipoShow" class="form-control" readonly>
+                                    <option value="select">Seleccione</option>
+                                    <option value="electronico">Electr&oacute;nico</option>
+                                    <option value="prenda">Prenda de Vestir</option>
+                                    <option value="material">Material Escolar</option>
+                                    <option value="doc">Documentos</option>
+                                    <option value="carnet">Carnet</option>
+                                    <option value="bolso">Bolso</option>
+                                    <option value="otro">Otros</option>
+                                </select>
+                            </div>
+                            <div id="divButtons" style="display: none;" class="btn-group form-group col-12 justify-content-center" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-success" onclick="toSaveChange()"><i class="far fa-save"></i> Guardar</button>
+                                <button type="button" class="btn btn-danger" onclick="toDelete()"><i class="far fa-trash-alt"></i> Eliminar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
         </div>
+</div>
 
     <div class="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" >
