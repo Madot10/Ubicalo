@@ -19,35 +19,40 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/brands.css" integrity="sha384-QT2Z8ljl3UupqMtQNmPyhSPO/d5qbrzWmFxJqmY7tqoTuT2YrQLEqzvVOP2cT5XW" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/regular.css" integrity="sha384-z3ccjLyn+akM2DtvRQCXJwvT5bGZsspS4uptQKNXNg778nyzvdMqiGcqHVGiAUyY" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/brands.css" integrity="sha384-QT2Z8ljl3UupqMtQNmPyhSPO/d5qbrzWmFxJqmY7tqoTuT2YrQLEqzvVOP2cT5XW"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/regular.css" integrity="sha384-z3ccjLyn+akM2DtvRQCXJwvT5bGZsspS4uptQKNXNg778nyzvdMqiGcqHVGiAUyY"
+        crossorigin="anonymous">
 
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
     <link rel="stylesheet" href="src/css/style.css">
     <script src="src/js/firebase.js"></script>
     <script src="src/js/Main.js"></script>
-    
+
 </head>
 
 <body class="bg-dark">
     <!-- MODAL ERROR -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="errModal">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">ERROR! </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Algo pasó...</p>
-                        <p><span id="errText"></span></p>
-                    </div>
-    
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ERROR! </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <div class="modal-body">
+                    <p>Algo pasó...</p>
+                    <p>
+                        <span id="errText"></span>
+                    </p>
+                </div>
+
             </div>
+        </div>
     </div>
 
     <!-- MODAL PopObject -->
@@ -69,7 +74,7 @@
                             </div>
                             <div class="form-group col-12">
                                 <label for="input-descShow">Descripción:</label>
-                                <textarea  type="textarea" class="form-control" id="input-desShow" name="obj_descripcion" readonly></textarea>
+                                <textarea type="textarea" class="form-control" id="input-desShow" name="obj_descripcion" readonly></textarea>
                             </div>
                             <div class="form-group col-12">
                                 <label for="input-ult-ubiShow">Se encuentra en:</label>
@@ -89,8 +94,10 @@
                                 </select>
                             </div>
                             <div id="divButtons" style="display: none;" class="btn-group form-group col-12 justify-content-center" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-success" onclick="toSaveChange()"><i class="far fa-save"></i> Guardar</button>
-                                <button type="button" class="btn btn-danger" onclick="toDelete()"><i class="far fa-trash-alt"></i> Eliminar</button>
+                                <button type="button" class="btn btn-success" onclick="toSaveChange()">
+                                    <i class="far fa-save"></i> Guardar</button>
+                                <button type="button" class="btn btn-danger" onclick="toDelete()">
+                                    <i class="far fa-trash-alt"></i> Eliminar</button>
                             </div>
                         </div>
 
@@ -99,15 +106,15 @@
 
             </div>
         </div>
-</div>
+    </div>
 
     <div class="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-            <a class="navbar-brand" href="#" onclick="changeScreen('main')" >
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#" onclick="changeScreen('main')">
                 <img src="src/Logo1.png" height="35em" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav" role="navigation">
@@ -122,92 +129,102 @@
         <div id="loader" style=" display: none"></div>
         <div id="overlay" style=" display: none"></div>
 
-            <div class="screen text-light" id="start">
-                <div class="justify-content-md-center">
-                    <div class="col-xl-auto" align="center">
-                        <h4>Bienvenido a</h4>
-                        <h4>U.bicalo</h4>
-                            <p>Encontraste o perdiste algo, ubicalo con la colaboracion de los ucabistas</p>
-                            <button type="button" class="btn btn-outline-light btn-block" onclick="LogInPopup()"><i class="fab fa-google"></i> Iniciar sesión</button>
+        <div class="screen text-light" id="start">
+            <div class="justify-content-md-center">
+                <div class="col-xl-auto" align="center">
+                    <h4>Bienvenido a</h4>
+                    <h4>U.bicalo</h4>
+                    <p>Encontraste o perdiste algo, ubicalo con la colaboracion de los ucabistas</p>
+                    <button type="button" class="btn btn-outline-light btn-block" onclick="LogInPopup()">
+                        <i class="fab fa-google"></i> Iniciar sesión</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen" id="main" style="display: none;">
+            <div class="justify-content-md-center">
+                <div class="col-xl-auto" align="center">
+                    <div class="container text-dark">
+                        <br>
+                        <h4>Pantalla inicio</h4>
+                        <p>
+                            Proyecto para INGENIO - Esc. Ing. Informática
+                            <span class="badge badge-primary">New</span>
+                            <br> ¿Encontraste o perdiste algo?, ubicalo con la colaboracion de los ucabistas
+                            <br>
+                            <br> Ante cualquier <b>EVENTUALIDAD</b> se puede comunicar a los teléfonos: <br>
+                            407 4546 4185 / 4351 / 4221 0412-2821517 <br>
+                            Los números 407 4184 y 0424-2042820 cuentan con atención las 24 horas
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="screen" id="main" style="display: none;">
-                    <div class="justify-content-md-center">
-                            <div class="col-xl-auto" align="center">
-                                <div class="container text-dark">
-                                    <br>
-                                    <h4>Pantalla inicio</h4>
-                                        <p>
-                                            Proyecto para INGENIO - Esc. Ing. Informática <span class="badge badge-primary">New</span> <br>
-                                            ¿Encontraste o perdiste algo?, ubicalo con la colaboracion de los ucabistas
-                                        </p>
+        <div id="buscar" class="screen" style="display: none;">
+            <div class="container text-dark">
+                <h2>Buscador</h2>
+                <p class="lead">Podrás ubicar los objetos recientemente reportados</p>
+                <hr class="my-4">
+                <div class="list-group" id="objPer">
+                </div>
+            </div>
+        </div>
+
+        <div id="publicar" class="screen" style="display: none;">
+            <div class="container text-dark">
+                <h2>Notificar</h2>
+                <p class="lead">Encontraste un objeto?
+                    <br> Ayuda al due&ntilde;o a encontrarlo!</p>
+                <hr class="my-4">
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-xl-auto">
+                            <form id="fpublicar">
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label for="input-ubicacion">D&oacute;nde lo encontraste?*</label>
+                                        <input type="text" class="form-control" id="input-ubicacion" name="obj_ubicacion">
                                     </div>
-                            </div>
+                                    <div class="form-group col-12">
+                                        <label for="input-descripcion">Descripción</label>
+                                        <input type="textarea" class="form-control" id="input-descripcion" name="obj_descripcion">
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="input-hora">Hora:
+                                            <span id="timeToShow">2:00AM</span>
+                                        </label>
+                                        <input type="range" oninput="rangeTime(this)" class="custom-range" value="2" min="1" max="24" id="input-hora" name="obj_hora">
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="input-ult-ubicacion">A qui&eacute;n se lo dejaste?*</label>
+                                        <input type="text" class="form-control" id="input-ult-ubicacion" name="obj_ult_ubicacion">
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="select-tipo">Tipo de objeto*</label>
+                                        <select name="obj_tipo" id="select-tipo" class="form-control">
+                                            <option value="select">Seleccione</option>
+                                            <option value="electronico">Electr&oacute;nico</option>
+                                            <option value="prenda">Prenda de Vestir</option>
+                                            <option value="material">Material Escolar</option>
+                                            <option value="doc">Documentos</option>
+                                            <option value="carnet">Carnet</option>
+                                            <option value="bolso">Bolso</option>
+                                            <option value="otro">Otros</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <button class="btn btn-outline-success btn-block" onclick="enviarObj(); return false;">
+                                            <b>Notificar</b>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-            </div>
-
-            <div id="buscar" class="screen" style="display: none;">
-                <div class="container text-dark">
-                    <h2>Buscador</h2>
-                    <p class="lead">Podrás ubicar los objetos recientemente reportados</p>
-                    <hr class="my-4">
-                    <div class="list-group" id="objPer">
                     </div>
                 </div>
             </div>
-
-            <div  id="publicar" class="screen" style="display: none;">
-                <div class="container text-dark">
-                    <h2>Notificar</h2>
-                    <p class="lead">Encontraste un objeto? <br>
-                        Ayuda al due&ntilde;o a encontrarlo!</p>
-                    <hr class="my-4">
-                    <div class="container">
-                            <div class="row justify-content-md-center">
-                                <div class="col-xl-auto">
-                                    <form id="fpublicar">
-                                        <div class="form-row">
-                                            <div class="form-group col-12">
-                                                <label for="input-ubicacion">D&oacute;nde lo encontraste?*</label>
-                                                <input type="text" class="form-control" id="input-ubicacion" name="obj_ubicacion">
-                                            </div>
-                                            <div class="form-group col-12">
-                                                <label for="input-descripcion">Descripción</label>
-                                                <input type="textarea" class="form-control" id="input-descripcion" name="obj_descripcion">
-                                            </div>
-                                            <div class="form-group col-12">
-                                                <label for="input-hora">Hora: <span id="timeToShow">2:00AM</span></label>
-                                                <input type="range" oninput="rangeTime(this)" class="custom-range" value="2" min="1" max="24" id="input-hora" name="obj_hora">
-                                            </div>
-                                            <div class="form-group col-12">
-                                                <label for="input-ult-ubicacion">A qui&eacute;n se lo dejaste?*</label>
-                                                <input type="text" class="form-control" id="input-ult-ubicacion" name="obj_ult_ubicacion">
-                                            </div>
-                                            <div class="form-group col-12">
-                                                <label for="select-tipo">Tipo de objeto*</label>
-                                                <select name="obj_tipo" id="select-tipo" class="form-control">
-                                                    <option value="select">Seleccione</option>
-                                                    <option value="electronico">Electr&oacute;nico</option>
-                                                    <option value="prenda">Prenda de Vestir</option>
-                                                    <option value="material">Material Escolar</option>
-                                                    <option value="doc">Documentos</option>
-                                                    <option value="carnet">Carnet</option>
-                                                    <option value="bolso">Bolso</option>
-                                                    <option value="otro">Otros</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-12">
-                                                    <button class="btn btn-outline-success btn-block" onclick="enviarObj(); return false;"><b>Notificar</b></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
+        </div>
     </div>
 </body>
 
