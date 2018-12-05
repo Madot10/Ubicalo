@@ -31,16 +31,16 @@ function isAdmin(email){
             .then(doc => {
                 if (!doc.exists) {
                     //No existe usuario => no autorizado 
-                    console.log('No encontrado', email);
+                    //console.log('No encontrado', email);
                     return false;
                 } else {
                     //Existe
-                    console.log('Encontrado => ', doc.data().auth);
+                    //console.log('Encontrado => ', doc.data().auth);
                     return doc.data().auth            
                 }
             }).catch(err => {
                 //ERROR 
-                console.log('ERROR ',email, err);
+                //console.log('ERROR ',email, err);
                 return false;
               });
           
@@ -54,7 +54,7 @@ function LogInPopup(){
         
        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
-            console.log("ok");
+            //console.log("ok");
         })
         .catch(function(error) {
         // Handle Errors here.
@@ -89,12 +89,12 @@ function addRegistro(dnd, hr, sts, catg, descri){
         timeAdd: new Date()
     })
     .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+        //console.log("Document written with ID: ", docRef.id);
         clearForm();
         toggleLoader();
     })
     .catch(function(error) {
-        console.error("Error adding document: ", error);
+        //console.error("Error adding document: ", error);
         popError(error);
         toggleLoader();
     });
@@ -108,7 +108,7 @@ function getAllReg(){
                 // doc.data() is never undefined for query doc snapshots
                 genHTMLobj(`${doc.data().catg.toUpperCase()}: ${doc.data().status}`, doc.data().description, doc.data().timeAdd.seconds, objArr.length, doc.id);
                 objArr[objArr.length] = doc.data();
-                console.log(doc.id, " => ", doc.data());
+                //console.log(doc.id, " => ", doc.data());
             });
             toggleLoader();
     });
@@ -118,7 +118,7 @@ window.onload = ()=>{
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 		  // User is signed in.
-		  console.log("ok1",user);
+		  //console.log("ok1",user);
 		  userData = { 
                 email: user.email,
 			    name: user.displayName
@@ -138,7 +138,7 @@ window.onload = ()=>{
 		  changeScreen("main");
 		} else {
 		  // No user is signed in.
-		  console.log("no1");
+		  //console.log("no1");
 		  //changeScreen("start");
 		}
 	  });

@@ -46,7 +46,7 @@ function enviarObj(){
     let inputs = document.getElementById("fpublicar").elements;
     if(verificarFormP()){
         addRegistro(inputs["obj_ubicacion"].value, inputs["obj_hora"].value,inputs["obj_ult_ubicacion"].value,inputs["obj_tipo"].value,inputs["obj_descripcion"].value);
-        console.log("sendit");
+        //console.log("sendit");
     }
 }
 
@@ -224,7 +224,7 @@ function timeAgoGen(sgOld){
 }
 
 function popObj(index, id){
-    console.log("OBJECTO CLICKER", objArr[index]);
+    //console.log("OBJECTO CLICKER", objArr[index]);
     //Cargar datos a modal
     idSelect = id;
     let obj = objArr[index];
@@ -262,9 +262,9 @@ function turnAdminMode(){
 
 function toDelete(){
     delRegistro({id: idSelect}).then(function(re){
-        console.log("respuesta", re.data);
+        //console.log("respuesta", re.data);
     }).catch(err =>{
-        console.error('Error', err);
+        //console.error('Error', err);
         popError(err);
     })
     $('#objModal').modal("hide");
@@ -279,18 +279,18 @@ function toSaveChange(){
     daSend['where'] = outputs['obj_ubicacion'].value;
     $('#objModal').modal("hide");
     modRegistro(daSend).then(function(re){
-        console.log("respuesta", re.data);
+        //console.log("respuesta", re.data);
     })
 }
 
 if (navigator.serviceWorker.controller) {
-    console.log('[PWA Builder] active service worker found, no need to register')
+    //console.log('Active service worker found, no need to register')
   } else {
     //Register the ServiceWorker
     navigator.serviceWorker.register('ubi-sw.js', {
       scope: './'
     }).then(function(reg) {
-      console.log('Service worker has been registered for scope:'+ reg.scope);
+      //console.log('Service worker has been registered for scope:'+ reg.scope);
     });
   }
   
